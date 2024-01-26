@@ -21,28 +21,43 @@ class Sedan extends VehicleModule.Vehicle {
     if (this.passenger < this.maxPassengers) {
       if (num + this.passenger <= this.maxPassengers) {
         this.passenger = num;
+        console.log(`${num} passenger(s) have entered the vehicle.`);
         return this.passenger;
       } else {
-        console.log(
-          `${this.model} ${this.make} can only fit five passengers.`
-        );
+        console.log(`${this.model} ${this.make} can only fit five passengers.`);
       }
     } else {
       console.log(`${this.model} ${this.make} is already full.`);
     }
   }
+
+  start() {
+    if (this.fuel > 0) {
+      console.log("Vehicle has started!");
+      return (this.started = true);
+    } else {
+      console.log("You are out of fuel!");
+      return (this.started = false);
+    }
+  }
+
+  serviceNeeded() {
+    if (this.mileage > 30000) {
+      this.scheduleService = true;
+      console.log(
+        "You need to bring your vehicle in for service before it blows up!"
+      );
+      return this.scheduleService;
+    } else {
+      console.log("Your vehicle is still in good condition.");
+    }
+  }
 }
 
 let myCar = new Sedan("Merucry", "A28", "2024", "dark-green", 150);
-myCar.loadPassenger(5)
-myCar.loadPassenger(1)
+myCar.start();
+myCar.loadPassenger(5);
+myCar.loadPassenger(1);
+myCar.stop();
+myCar.serviceNeeded();
 console.log(myCar);
-//Note: You can code your derived Car class here or make a file named index.js and do it there.
-
-//TO DO: Code the Car subclass here or in index.js file, i.e. class Car extends Vehicle ...
-
-//TO DO: Creating Instances and Testing Them
-
-//You can use the same instance "v" of the Vehicle class above for the base class.
-
-//Create at least two new instances of the Car class and test them here:
