@@ -2,13 +2,7 @@
 const VehicleModule = require("./vehicleBaseClass");
 
 //this shows how to call from this module...
-let v = new VehicleModule.Vehicle(
-  "Mercury",
-  "A28",
-  "2024",
-  "color",
-  "mileage"
-);
+let v = new VehicleModule.Vehicle("Mercury", "A28", "2024", "color", "mileage");
 console.log(v.make);
 
 //After you write the derived Car class, you should test it out.
@@ -22,10 +16,27 @@ class Sedan extends VehicleModule.Vehicle {
     this.fuel = 10;
     this.scheduleService = false;
   }
+
+  loadPassenger(num) {
+    if (this.passenger < this.maxPassengers) {
+      if (num + this.passenger <= this.maxPassengers) {
+        this.passenger = num;
+        return this.passenger;
+      } else {
+        console.log(
+          `${this.model} ${this.make} can only fit five passengers.`
+        );
+      }
+    } else {
+      console.log(`${this.model} ${this.make} is already full.`);
+    }
+  }
 }
 
-let myCar = new Sedan('Merucry', 'A28', '2024' , 'dark-green', 150)
-console.log(myCar)
+let myCar = new Sedan("Merucry", "A28", "2024", "dark-green", 150);
+myCar.loadPassenger(5)
+myCar.loadPassenger(1)
+console.log(myCar);
 //Note: You can code your derived Car class here or make a file named index.js and do it there.
 
 //TO DO: Code the Car subclass here or in index.js file, i.e. class Car extends Vehicle ...
